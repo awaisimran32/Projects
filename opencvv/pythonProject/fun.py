@@ -23,7 +23,7 @@ while True:
         print("Cannot Capture.")
         break
     cv2.imshow("video",img)
-    cv2.imshow("gray video",img_gray)
+    # cv2.imshow("gray video",img_gray)
 
 
     if cv2.waitKey(1) & 0xFF == ord("q"):
