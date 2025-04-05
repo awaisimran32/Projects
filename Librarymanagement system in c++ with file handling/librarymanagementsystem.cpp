@@ -82,7 +82,7 @@ public:
       if(!file) return;
       members.clear();
       string id,name;
-      while(getline(file,id,',')&&getline(file,name,',')){
+      while(getline(file,id,',')&&getline(file,name)){
          members.push_back(Member(name,id));
       }
       file.close();
@@ -92,7 +92,7 @@ public:
     void addbook(string title,string author,string id){
        books.push_back(Book(title,author,id));
        savebooks();
-       cout<<"Book Added : "<<title<<'\n'; 
+       cout<<"Book Added : "<<title<<'\n';
     }
     void addmember(string name,string id){
         members.push_back(Member(name,id));
@@ -134,10 +134,66 @@ public:
 };
 
 int main(){
-    librarian Librarian("Awais");
-    Librarian.addbook("Atomic Habits","Awais","855");
-    Librarian.addmember("Ahmad","J1");
-    Librarian.displayBooks();
-    Librarian.displaymembers();
+    bool running=true;
+    string name;
+    cout<<"Give Your name : ";
+    cin>>name;
+    librarian Librarian(name);
+    while(running){
+    int choice;
+
+    cout<<"Hello "<<name<<" enter your choice :\n"; 
+    cout<<"1.Display Books \n";
+    cout<<"2.Display members \n";
+    cout<<"3.Add book \n";
+    cout<<"4.Add Member \n";
+    cout<<"5.Issue Book\n";
+    cout<<"6.Return Book\n";
+    cout<<"7.EXIT       \n";
+    cin>>choice;
+    if(choice==1){
+        Librarian.displayBooks();
+    }
+    else if(choice==2){
+        Librarian.displaymembers();
+    }
+    else if(choice==3){
+        string t;
+        string a;
+        string i;
+        cout<<"Give Title of Book : \n";
+        cin>>t;
+        cout<<"Give name of author : \n";
+        cin>>a;
+        cout<<"Give id of book : \n";
+        cin>>i;
+        Librarian.addbook(t,a,i);
+    }
+    else if(choice==4){
+        string n;
+        string i;
+        cout<<"Give name of member : \n";
+        cin>>n;
+        cout<<"Give id of member : \n";
+        cin>>i;
+        Librarian.addmember(n,i);
+    }
+    else if(choice==5){
+        string i;
+        cout<<"Give id of book : \n";
+        cin>>i;
+        Librarian.issuebook(i);
+    }
+    else if(choice==6){
+        string i;
+        cout<<"Give id of book : \n";
+        cin>>i;
+        Librarian.returnbook(i);
+    }
+    else if(choice==7){
+        running=false;
+    }
+}
+
     return 0;
 }
